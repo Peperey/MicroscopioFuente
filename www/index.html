@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Microscopio</title>
+<style>
+body{
+background:black;
+color:white;
+text-align:center;
+font-family:Arial;
+}
+video{
+width:100%;
+}
+button{
+padding:12px;
+margin:5px;
+}
+</style>
+</head>
+<body>
+
+<h2>Microscopio Digital</h2>
+
+<video id="video" autoplay playsinline></video>
+
+<br>
+
+<button onclick="zoomMas()">+</button>
+<button onclick="zoomMenos()">-</button>
+
+<script>
+let zoom=1;
+const video=document.getElementById("video");
+
+navigator.mediaDevices.getUserMedia({
+video:{facingMode:"environment"}
+}).then(stream=>{
+video.srcObject=stream;
+});
+
+function zoomMas(){
+zoom+=0.2;
+video.style.transform="scale("+zoom+")";
+}
+
+function zoomMenos(){
+if(zoom>1){
+zoom-=0.2;
+video.style.transform="scale("+zoom+")";
+}
+}
+</script>
+
+</body>
+</html>
